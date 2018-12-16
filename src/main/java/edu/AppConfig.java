@@ -11,8 +11,4 @@ public class AppConfig {
         return new Auth();
     }
 
-    @Bean
-    User user(){
-        return new User();
-    }
 }
