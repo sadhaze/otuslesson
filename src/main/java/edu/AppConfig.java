@@ -11,4 +11,8 @@ public class AppConfig {
         return new Auth();
     }
 
+    @Bean
+    Greeting greeting(){
+        return new Greeting();
+    }
 }

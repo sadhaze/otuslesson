@@ -1,5 +1,6 @@
 import edu.AppConfig;
 import edu.Auth;
+import edu.Greeting;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,9 @@ public class Application {
         ctx.register(AppConfig.class);
         ctx.refresh();
 
-        Auth auth = ctx.getBean(Auth.class);
+        //Auth auth = ctx.getBean(Auth.class);
+
+        Greeting greeting = ctx.getBean(Greeting.class);
+        System.out.println(greeting.getGreeting());
     }
 }
