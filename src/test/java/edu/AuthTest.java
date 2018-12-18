@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 class AuthTest {
     private Auth auth = new Auth();
 
-    public void setAuth(Auth auth){
-        this.auth = auth;
-    }
-
     @Test
     void tAuthAccessTest_1() {
         Assertions.assertEquals("Access", auth.getAuth("Admin", "Admin"));
