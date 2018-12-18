@@ -14,6 +14,7 @@ public class Application {
         ctx.refresh();
 
         //Auth auth = ctx.getBean(Auth.class);
+        //auth.getAuth("Admin", "Admin");
 
         Greeting greeting = ctx.getBean(Greeting.class);
         System.out.println(greeting.getGreeting());
