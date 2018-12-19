@@ -3,14 +3,12 @@ package edu;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.management.MXBean;
-
 @Configuration
 public class AppConfig {
 
     @Bean
-    Auth auth(){
-        return new Auth();
+    IAnswerCounter answerCounter(){
+        return new AnswerCounter();
     }
 
     @Bean
@@ -19,12 +17,7 @@ public class AppConfig {
     }
 
     @Bean
-    Quiz quiz(){
-        return new Quiz();
-    }
-
-    @Bean
-    AnswerCounter answerCounter(){
-        return new AnswerCounter();
+    Quiz quiz(IAnswerCounter counter){
+        return new Quiz(counter);
     }
 }

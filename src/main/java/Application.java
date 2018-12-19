@@ -11,9 +11,6 @@ public class Application {
         ctx.register(AppConfig.class);
         ctx.refresh();
 
-        //Auth auth = ctx.getBean(Auth.class);
-        //auth.getAuth("Admin", "Admin");
-
         Greeting greeting = ctx.getBean(Greeting.class);
         Quiz quiz = ctx.getBean(Quiz.class);
         AnswerCounter answerCounter = ctx.getBean(AnswerCounter.class);
@@ -21,7 +18,7 @@ public class Application {
         System.out.println(greeting.getGreeting());
 
         for(int i = 1; i <= 5; i++) {
-            answerCounter.setCount(quiz.getQuestion(i));
+            quiz.getQuestion(i);
         }
 
         System.out.print(answerCounter.getResult());
