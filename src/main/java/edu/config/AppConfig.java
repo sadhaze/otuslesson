@@ -18,7 +18,7 @@ public class AppConfig {
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("/messages/messages");
-        ms.setDefaultEncoding("WINDOWS-1251");
+        ms.setDefaultEncoding("UTF-8");
         return ms;
     }
 

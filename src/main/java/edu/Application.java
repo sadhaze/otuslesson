@@ -32,10 +32,10 @@ public class Application {
         //System.out.print(answerCounter.getResult());
 
         GreetingImpl bundleGreetingService = ctx.getBean(BundleGreetingService.class);
-        QuizImpl bundleQuizService = ctx.getBean(BundleQuizService.class);
+        //QuizImpl bundleQuizService = ctx.getBean(BundleQuizService.class);
 
         System.out.println(bundleGreetingService.getGreeting());
-        bundleQuizService.startQuiz();
-        System.out.print(answerCounter.getResult());
+        //bundleQuizService.startQuiz();
+        //System.out.print(answerCounter.getResult());
     }
 }

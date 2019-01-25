@@ -36,7 +36,7 @@ public class BundleGreetingService implements GreetingImpl {
 
         return messageSource.getMessage(
                 "greeting.hello",
-                new String[] {" " + lname + " " + fname + "!"},
+                new String[] {lname, fname},
                 Locale.ENGLISH);
     }
 }
