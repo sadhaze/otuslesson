@@ -11,10 +11,10 @@ import java.io.ByteArrayInputStream;
 @DisplayName("Тест викторины")
 class QuizServiceTest {
     @Mock
-    private AnswerCounterImpl counter = new AnswerCounterService();
+    private AnswerCounterService counter = new AnswerCounterService();
 
     @Mock
-    private CsvQuestionReaderImpl fileReader = new CsvQuestionReaderDao("questions.csv");
+    private CsvQuestionReaderDao fileReader = new CsvQuestionReaderDao("questions.csv");
 
     private QuizImpl quizService = new QuizService(counter, fileReader);
 
@@ -34,14 +34,14 @@ class QuizServiceTest {
     @DisplayName("Тест на некорректный ответ")
     void tAuthFailedTest_1() {
         System.setIn(new ByteArrayInputStream("ПЯТЬ\n".getBytes()));
-        Assertions.assertEquals("Не верный ответ! В свледующий раз повезет!\n", quizService.getQuestion(0));
+        Assertions.assertEquals("Не правильный ответ! В другой раз повезет!", quizService.getQuestion(0));
     }
 
     @Disabled
     @Test
     @DisplayName("Тест на некорректный ответ")
     void tAuthSuccessTest_1() {
-        System.setIn(new ByteArrayInputStream("ПЯТЬ\n".getBytes()));
-        Assertions.assertEquals("Бинго!\n", quizService.getQuestion(4));
+        System.setIn(new ByteArrayInputStream("ПЯТЬ".getBytes()));
+        Assertions.assertEquals("Бинго!", quizService.getQuestion(4));
     }
 }

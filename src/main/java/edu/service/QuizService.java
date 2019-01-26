@@ -10,14 +10,14 @@ public class QuizService implements QuizImpl{
     private CsvQuestionReaderImpl questionReader;
     private Scanner scanner;
 
-    public QuizService(AnswerCounterImpl counter, CsvQuestionReaderImpl questionReader){
+    public QuizService(AnswerCounterService counter, CsvQuestionReaderImpl questionReader){
         this.counter = counter;
         this.questionReader = questionReader;
     }
 
     public void startQuiz(){
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
-            this.getQuestion(i);
+            System.out.println(this.getQuestion(i));
         }
     }
 
@@ -30,10 +30,10 @@ public class QuizService implements QuizImpl{
         answer = scanner.nextLine().toLowerCase();
         if (answer.compareTo(questionReader.getAnswer(questionNumber)) != 0){
             counter.setWrong();
-            return "Не верный ответ! В свледующий раз повезет!\n";
+            return "Не правильный ответ! В другой раз повезет!";
         } else {
             counter.setRight();
-            return "Бинго!\n";
+            return "Бинго!";
         }
         //return "Что-то пошло не так!";
     }

@@ -9,21 +9,24 @@ import java.util.Scanner;
 
 @Service
 public class BundleQuizService implements QuizImpl {
+
     @Autowired
     private MessageSource messageSource;
+    private BundleLocaleImpl bundleLocale;
 
     private AnswerCounterImpl counter;
     private CsvQuestionReaderImpl questionReader;
     private Scanner scanner;
 
-    public BundleQuizService(AnswerCounterImpl counter, CsvQuestionReaderImpl questionReader){
+    public BundleQuizService(BundleAnswerCounterService counter, CsvQuestionReaderImpl questionReader, BundleLocaleImpl bundleLocale){
         this.counter = counter;
         this.questionReader = questionReader;
+        this.bundleLocale = bundleLocale;
     }
 
     public void startQuiz(){
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
-            this.getQuestion(i);
+            System.out.println(this.getQuestion(i));
         }
     }
 
@@ -32,29 +35,43 @@ public class BundleQuizService implements QuizImpl {
             return messageSource.getMessage(
                     "quiz.noquestion",
                     new String[] {""},
-                    Locale.ENGLISH);
+                    bundleLocale.getLocale());
         }
 
-        System.out.print("\n" + questionReader.getQuestion(questionNumber) + "\n" + messageSource.getMessage(
-                "quiz.answer",
-                new String[] {""},
-                Locale.ENGLISH)
+        System.out.print("\n"
+                +
+                messageSource.getMessage(
+                        questionReader.getQuestion(questionNumber),
+                        new String[] {""},
+                        bundleLocale.getLocale())
+                +
+                "\n"
+                +
+                messageSource.getMessage(
+                        "quiz.answer",
+                        new String[] {""},
+                        bundleLocale.getLocale())
         );
         scanner = new Scanner(System.in);
         String answer;
         answer = scanner.nextLine().toLowerCase();
-        if (answer.compareTo(questionReader.getAnswer(questionNumber)) != 0){
+        if (answer.compareTo(
+                messageSource.getMessage(
+                        questionReader.getAnswer(questionNumber),
+                        new String[] {""},
+                        bundleLocale.getLocale())
+                ) != 0){
             counter.setWrong();
             return messageSource.getMessage(
                     "quiz.wrong",
-                    new String[] {"\n"},
-                    Locale.ENGLISH);
+                    new String[] {""},
+                    bundleLocale.getLocale());
         } else {
             counter.setRight();
             return messageSource.getMessage(
                     "quiz.right",
-                    new String[] {"\n"},
-                    Locale.ENGLISH);
+                    new String[] {""},
+                    bundleLocale.getLocale());
         }
         //return "Что-то пошло не так!";
     }
