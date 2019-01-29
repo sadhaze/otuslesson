@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 @Service
@@ -12,6 +11,11 @@ public class BundleGreetingService implements GreetingImpl {
 
     @Autowired
     private MessageSource messageSource;
+    private BundleLocaleImpl bundleLocale;
+
+    public BundleGreetingService(BundleLocaleImpl bundleLocale){
+        this.bundleLocale = bundleLocale;
+    }
 
     public String getGreeting(){
         Scanner in = new Scanner(System.in);
@@ -20,7 +24,7 @@ public class BundleGreetingService implements GreetingImpl {
                 messageSource.getMessage(
                         "greeting.fname",
                         new String[] {" "},
-                        Locale.ENGLISH)
+                        bundleLocale.getLocale())
         );
 
         String fname = in.nextLine();
@@ -29,7 +33,7 @@ public class BundleGreetingService implements GreetingImpl {
                 messageSource.getMessage(
                         "greeting.lname",
                         new String[] {" "},
-                        Locale.ENGLISH)
+                        bundleLocale.getLocale())
         );
 
         String lname = in.nextLine();
@@ -37,6 +41,6 @@ public class BundleGreetingService implements GreetingImpl {
         return messageSource.getMessage(
                 "greeting.hello",
                 new String[] {lname, fname},
-                Locale.ENGLISH);
+                bundleLocale.getLocale());
     }
 }

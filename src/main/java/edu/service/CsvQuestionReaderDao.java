@@ -1,36 +1,22 @@
 package edu.service;
 
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 import java.util.ArrayList;
 
+@Service
 public class CsvQuestionReaderDao implements CsvQuestionReaderImpl {
     private ArrayList<String> questions = new ArrayList<>();
     private ArrayList<String> answers = new ArrayList<>();
 
-    public CsvQuestionReaderDao(String fileName) {
-        try {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream inputStream = classloader.getResourceAsStream(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+    public CsvQuestionReaderDao(){
+        return;
+    }
 
-            String line;
-            String[] string = {"", ""};
-
-            line = bufferedReader.readLine();
-            for (int i = 0; line.length() != 0; i++) {
-                string = line.split("\\|");
-                this.questions.add(i, string[0]);
-                this.answers.add(i, string[1]);
-                line = bufferedReader.readLine();
-            }
-
-            bufferedReader.close();
-            inputStreamReader.close();
-            inputStream.close();
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+    public CsvQuestionReaderDao(String fileName){
+        readFile(fileName);
+        return;
     }
 
     public String getAnswer(int answerNumber) {
@@ -54,6 +40,35 @@ public class CsvQuestionReaderDao implements CsvQuestionReaderImpl {
             return -1;
         } else {
             return this.questions.size();
+        }
+    }
+
+    public void readFile(String fileName){
+        this.questions.clear();
+        this.answers.clear();
+
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream inputStream = classloader.getResourceAsStream(fileName);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String line;
+            String[] string = {"", ""};
+
+            line = bufferedReader.readLine();
+            for (int i = 0; line.length() != 0; i++) {
+                string = line.split("\\|");
+                this.questions.add(i, string[0]);
+                this.answers.add(i, string[1]);
+                line = bufferedReader.readLine();
+            }
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -12,6 +12,11 @@ public class TestConfig {
     }
 
     @Bean
+    BundleGreetingServiceTest bundleGreetingTest(){
+        return new BundleGreetingServiceTest();
+    }
+
+    @Bean
     GreetingServiceTest greetingTest(){
         return new GreetingServiceTest();
     }
