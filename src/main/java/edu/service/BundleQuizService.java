@@ -12,11 +12,11 @@ public class BundleQuizService implements QuizImpl {
     @Autowired
     private MessageSource messageSource;
 
-    private AnswerCounterImpl counter;
+    private AnswerCounter counter;
     private CsvQuestionReaderImpl questionReader;
     private Scanner scanner;
 
-    public BundleQuizService(AnswerCounterImpl counter, CsvQuestionReaderImpl questionReader){
+    public BundleQuizService(AnswerCounter counter, CsvQuestionReaderImpl questionReader){
         this.counter = counter;
         this.questionReader = questionReader;
     }

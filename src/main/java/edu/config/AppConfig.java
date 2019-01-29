@@ -23,7 +23,7 @@ public class AppConfig {
     }
 
 /*    @Bean
-    AnswerCounterImpl answerCounter(){
+    AnswerCounter answerCounter(){
         return new AnswerCounter();
     }
 
@@ -33,7 +33,7 @@ public class AppConfig {
     }
 
     @Bean
-    Quiz quiz(AnswerCounterImpl counter){
+    Quiz quiz(AnswerCounter counter){
         return new Quiz(counter);
     }*/
 }

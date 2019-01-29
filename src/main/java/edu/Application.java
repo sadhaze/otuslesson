@@ -24,7 +24,7 @@ public class Application {
 
         GreetingImpl greetingService = ctx.getBean(GreetingService.class);
         QuizImpl quizService = ctx.getBean(QuizService.class);
-        AnswerCounterImpl answerCounter = ctx.getBean(AnswerCounterService.class);
+        AnswerCounter answerCounter = ctx.getBean(AnswerCounterService.class);
         CsvQuestionReaderImpl fileReader = ctx.getBean(CsvQuestionReaderDao.class);
 
         //System.out.println(greetingService.getGreeting());

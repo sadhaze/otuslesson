@@ -1,6 +1,6 @@
 package edu.service;
 
-import edu.service.AnswerCounterImpl;
+import edu.service.AnswerCounter;
 import edu.service.AnswerCounterService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Тест счетчика ответов")
 class AnswerCounterServiceTest {
-    private AnswerCounterImpl answerCounterService = new AnswerCounterService();
+    private AnswerCounter answerCounterService = new AnswerCounterService();
 
     @Test
     @DisplayName("Тест счетчика ответов")

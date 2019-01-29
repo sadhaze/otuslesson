@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 @DisplayName("Тест викторины")
 class QuizServiceTest {
     @Mock
-    private AnswerCounterImpl counter = new AnswerCounterService();
+    private AnswerCounter counter = new AnswerCounterService();
 
     @Mock
     private CsvQuestionReaderImpl fileReader = new CsvQuestionReaderDao("questions.csv");

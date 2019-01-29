@@ -1,6 +1,6 @@
 package edu.service;
 
-public interface AnswerCounterImpl {
+public interface AnswerCounter {
     void setRight();
     void setWrong();
     String getResult();

@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 @Service
 public class QuizService implements QuizImpl{
-    private AnswerCounterImpl counter;
+    private AnswerCounter counter;
     private CsvQuestionReaderImpl questionReader;
     private Scanner scanner;
 
-    public QuizService(AnswerCounterImpl counter, CsvQuestionReaderImpl questionReader){
+    public QuizService(AnswerCounter counter, CsvQuestionReaderImpl questionReader){
         this.counter = counter;
         this.questionReader = questionReader;
     }
