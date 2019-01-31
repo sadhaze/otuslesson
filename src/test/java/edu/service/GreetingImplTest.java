@@ -1,15 +1,13 @@
 package edu.service;
 
-import edu.service.GreetingImpl;
-import edu.service.GreetingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 
 @DisplayName("Тест приветствия")
-class GreetingServiceTest {
-    private GreetingImpl greetingService = new GreetingService();
+class GreetingImplTest {
+    private Greeting greetingService = new GreetingImpl();
 
     @Test
     @DisplayName("Тест приветствия")

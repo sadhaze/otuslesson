@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
-@Service
-public class BundleGreetingService implements GreetingImpl {
+@Service("Greeting bundle service")
+public class GreetingBundleImpl implements Greeting {
+    private BundleLocale bundleLocale = null;
+    private MessageSource messageSource = null;
 
     @Autowired
-    private MessageSource messageSource;
-    private BundleLocaleImpl bundleLocale;
-
-    public BundleGreetingService(BundleLocaleImpl bundleLocale){
+    public GreetingBundleImpl(BundleLocale bundleLocale, MessageSource messageSource){
         this.bundleLocale = bundleLocale;
+        this.messageSource = messageSource;
     }
 
     public String getGreeting(){
@@ -23,7 +23,7 @@ public class BundleGreetingService implements GreetingImpl {
         System.out.println(
                 messageSource.getMessage(
                         "greeting.fname",
-                        new String[] {" "},
+                        new String[] {""},
                         bundleLocale.getLocale())
         );
 
@@ -32,7 +32,7 @@ public class BundleGreetingService implements GreetingImpl {
         System.out.println(
                 messageSource.getMessage(
                         "greeting.lname",
-                        new String[] {" "},
+                        new String[] {""},
                         bundleLocale.getLocale())
         );
 

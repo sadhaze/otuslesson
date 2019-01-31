@@ -9,14 +9,18 @@ import org.mockito.Mock;
 import java.io.ByteArrayInputStream;
 
 @DisplayName("Тест викторины")
-class QuizServiceTest {
+class QuizImplTest {
     @Mock
-    private AnswerCounter counter = new AnswerCounterService();
+    private AnswerCounterImpl counter;
 
     @Mock
-    private CsvQuestionReaderImpl fileReader = new CsvQuestionReaderDao("questions.csv");
+    private CsvQuestionReaderDaoImpl fileReader;
 
-    private QuizImpl quizService = new QuizService(counter, fileReader);
+    @Mock
+    private GreetingImpl greetingImpl;
+
+    @Mock
+    private Quiz quizService = new QuizImpl(counter, fileReader, greetingImpl);
 
     @Test
     @DisplayName("Тест когда номер вопроса меньше меньше или равен нулю")

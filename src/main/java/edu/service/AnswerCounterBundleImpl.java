@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-@Service
-public class BundleAnswerCounterService implements AnswerCounterImpl {
-
-    @Autowired
-    private MessageSource messageSource;
-    private BundleLocaleImpl bundleLocale;
+@Service("Answer counter bundle service")
+public class AnswerCounterBundleImpl implements AnswerCounter {
+    private BundleLocale bundleLocale = null;
+    private MessageSource messageSource = null;
 
     private Integer right = 0;
     private Integer wrong = 0;
 
-    public BundleAnswerCounterService(BundleLocaleImpl bundleLocale){
+    @Autowired
+    public AnswerCounterBundleImpl(BundleLocale bundleLocale, MessageSource messageSource){
         this.bundleLocale = bundleLocale;
+        this.messageSource = messageSource;
     }
 
     public void setRight(){

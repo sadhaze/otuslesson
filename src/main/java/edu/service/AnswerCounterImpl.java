@@ -2,8 +2,8 @@ package edu.service;
 
 import org.springframework.stereotype.Service;
 
-@Service
-public class AnswerCounterService implements AnswerCounter {
+@Service("Answer counter service")
+public class AnswerCounterImpl implements AnswerCounter {
     private int right = 0;
     private int wrong = 0;
 

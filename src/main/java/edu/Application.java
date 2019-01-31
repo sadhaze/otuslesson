@@ -25,26 +25,19 @@ public class Application {
         //SpringApplication.run(Application.class, args);
 
         //Обычная викторина ----------------------------------------------
-        GreetingImpl greetingService = ctx.getBean(GreetingService.class);
-        QuizImpl quizService = ctx.getBean(QuizService.class);
-        AnswerCounter answerCounter = ctx.getBean(AnswerCounterService.class);
-        CsvQuestionReaderImpl fileReader = ctx.getBean(CsvQuestionReaderDao.class);
+        Greeting greetingImpl = ctx.getBean(GreetingImpl.class);
+        Quiz quizImpl = ctx.getBean(QuizImpl.class);
+        AnswerCounter answerCounterImpl = ctx.getBean(AnswerCounterImpl.class);
+        CsvQuestionReaderDao fileReader = ctx.getBean(CsvQuestionReaderDaoImpl.class);
 
-                fileReader.readFile("questions.csv");
-        System.out.println(greetingService.getGreeting());
-        quizService.startQuiz();
-        System.out.print(answerCounter.getResult());
+        quizImpl.startQuiz();
 
         //Бандл викторина ------------------------------------------------
-        GreetingImpl bundleGreetingService = ctx.getBean(BundleGreetingService.class);
-        QuizImpl bundleQuizService = ctx.getBean(BundleQuizService.class);
-        AnswerCounterImpl bundleAnswerCounter = ctx.getBean(BundleAnswerCounterService.class);
-        BundleLocaleImpl bundleLocale = ctx.getBean(BundleLocaleService.class);
-        bundleLocale.setLocale(new Locale("ru", "RU"));
+        BundleLocale bundleLocaleImpl = ctx.getBean(BundleLocaleImpl.class);
+        Greeting greetingBundleImpl = ctx.getBean(GreetingBundleImpl.class);
+        Quiz quizBundleImpl = ctx.getBean(QuizBundleImpl.class);
+        AnswerCounter answerCounterBundleImpl = ctx.getBean(AnswerCounterBundleImpl.class);
 
-        fileReader.readFile("bundleQuestions.csv");
-        System.out.println(bundleGreetingService.getGreeting());
-        bundleQuizService.startQuiz();
-        System.out.print("\n" + bundleAnswerCounter.getResult() + "\n");
+        quizBundleImpl.startQuiz();
     }
 }
