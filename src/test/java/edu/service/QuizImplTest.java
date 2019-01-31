@@ -1,4 +1,4 @@
-package edu;
+package edu.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -9,29 +9,36 @@ import org.mockito.Mock;
 import java.io.ByteArrayInputStream;
 
 @DisplayName("Тест викторины")
-class QuizTest {
+class QuizImplTest {
     @Mock
-    private IAnswerCounter counter = new AnswerCounter();
+    private AnswerCounterImpl counter;
 
-    private Quiz quiz = new Quiz(counter);
+    @Mock
+    private CsvQuestionReaderDaoImpl fileReader;
+
+    @Mock
+    private GreetingImpl greetingImpl;
+
+    @Mock
+    private Quiz quizService = new QuizImpl(counter, fileReader, greetingImpl);
 
     @Test
     @DisplayName("Тест когда номер вопроса меньше меньше или равен нулю")
     void tAuthNoQuestionTest_1() {
-        Assertions.assertEquals("\nВопрос с указанным номером отсутствует!", quiz.getQuestion(0));
+        Assertions.assertEquals("\nВопрос с указанным номером отсутствует!", quizService.getQuestion(-1));
     }
 
     @Test
     @DisplayName("Тест когда номер вопроса меньше больше пяти")
     void tAuthNoQuestionTest_2() {
-        Assertions.assertEquals("\nВопрос с указанным номером отсутствует!", quiz.getQuestion(6));
+        Assertions.assertEquals("\nВопрос с указанным номером отсутствует!", quizService.getQuestion(5));
     }
 
     @Test
     @DisplayName("Тест на некорректный ответ")
     void tAuthFailedTest_1() {
         System.setIn(new ByteArrayInputStream("ПЯТЬ\n".getBytes()));
-        Assertions.assertEquals("Не верный ответ! В свледующий раз повезет!\n", quiz.getQuestion(1));
+        Assertions.assertEquals("Не верный ответ! В свледующий раз повезет!\n", quizService.getQuestion(0));
     }
 
     @Disabled
@@ -39,6 +46,6 @@ class QuizTest {
     @DisplayName("Тест на некорректный ответ")
     void tAuthSuccessTest_1() {
         System.setIn(new ByteArrayInputStream("ПЯТЬ\n".getBytes()));
-        Assertions.assertEquals("Бинго!\n", quiz.getQuestion(5));
+        Assertions.assertEquals("Бинго!\n", quizService.getQuestion(4));
     }
 }

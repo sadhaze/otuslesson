@@ -23,6 +23,8 @@
         <junit-jupiter.version>5.2.0</junit-jupiter.version>
         <junit-platform.version>1.2.0</junit-platform.version>
         <mockito.version>2.23.0</mockito.version>
+<!--        <org.springframework.version>4.0.0.RELEASE</org.springframework.version>
+        <org.springframework.batch>4.0.0.RELEASE</org.springframework.batch>-->
     </properties>
 
     <dependencies>
@@ -37,6 +39,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+<!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -102,5 +121,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

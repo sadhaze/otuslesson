@@ -1,6 +1,9 @@
-package edu;
+package edu.service;
 
-public class AnswerCounter implements IAnswerCounter {
+import org.springframework.stereotype.Service;
+
+@Service("Answer counter service")
+public class AnswerCounterImpl implements AnswerCounter {
     private int right = 0;
     private int wrong = 0;
 
