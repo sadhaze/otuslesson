@@ -1,8 +1,8 @@
-package edu.config;
+package edu.configs;
 
-//import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-//@ConfigurationProperties
+@ConfigurationProperties
 public class YamlProps {
 
     private String message;

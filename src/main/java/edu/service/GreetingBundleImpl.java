@@ -38,6 +38,8 @@ public class GreetingBundleImpl implements Greeting {
 
         String lname = in.nextLine();
 
+        System.out.println(fname + "    " + lname);
+
         return messageSource.getMessage(
                 "greeting.hello",
                 new String[] {lname, fname},

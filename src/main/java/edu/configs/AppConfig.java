@@ -1,6 +1,5 @@
-package edu.config;
+package edu.configs;
 
-import edu.service.*;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
