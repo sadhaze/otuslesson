@@ -1,61 +1,65 @@
 package edu.service;
 
+import edu.configs.AppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 import java.util.Scanner;
 
-@Service("Quiz bundle service")
-public class QuizBundleImpl implements Quiz {
-    private AnswerCounterBundleImpl counter = null;
-    private BundleLocale bundleLocale = null;
-    private CsvQuestionReaderDaoImpl questionReader = null;
-    private GreetingBundleImpl greetingBundleImpl = null;
+@RestController
+public class QuizController{
+    private AnswerCounterController counter = null;
+    //private LocaleController bundleLocale = null;
+    private CsvQuestionReaderDao questionReader = null;
+    private GreetingController greetingController = null;
     private MessageSource messageSource = null;
 
     private Scanner scanner;
 
-    public QuizBundleImpl(AnswerCounterBundleImpl counter, BundleLocale bundleLocale, CsvQuestionReaderDaoImpl questionReader, GreetingBundleImpl greetingBundleImpl, MessageSource messageSource){
+    //@Autowired
+    public QuizController(AnswerCounterController counter, CsvQuestionReaderDao questionReader, GreetingController greetingController, AppConfig props){
         this.counter = counter;
-        this.bundleLocale = bundleLocale;
+        //this.bundleLocale = props.getLocaleController();
         this.questionReader = questionReader;
-        this.greetingBundleImpl = greetingBundleImpl;
-        this.messageSource = messageSource;
+        this.greetingController = greetingController;
+        //this.messageSource = props.getMessage();
+        //bundleLocale.setLocale(new Locale("en", "EN"));
     }
 
-    public void startQuiz(){
-        bundleLocale.setLocale(new Locale("en", "EN"));
-
+    @RequestMapping(method = RequestMethod.GET, value = "/quiz/{lname}/{fname}")
+    @ResponseBody
+    public void getQuiz(@PathVariable("lname") String lname, @PathVariable("fname") String fname, AppConfig props){
         questionReader.readFile(
                 messageSource.getMessage(
                         "quiz.datafile.name",
                         new String[] {""},
-                        bundleLocale.getLocale())
+                        props.getLocale())
         );
 
-        System.out.println("\n" + greetingBundleImpl.getGreeting());
+        //System.out.println("\n" + bundleLocale.getLocale());
+        //System.out.println("\n" + greetingController.getGreeting(lname, fname));
 
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
-            this.getQuestion(i);
+            this.getQuestion(i, props);
         }
 
-        System.out.print("\n" + counter.getResult() + "\n");
+        //System.out.print("\n" + counter.getResult() + "\n");
     }
 
-    public String getQuestion(int questionNumber) {
+    public String getQuestion(int questionNumber, AppConfig props) {
         if(questionReader.questionValidation(questionNumber) == -1) {
             return messageSource.getMessage(
                     "quiz.noquestion",
                     new String[] {""},
-                    bundleLocale.getLocale());
+                    props.getLocale());
         }
 
         System.out.print("\n" + questionReader.getQuestion(questionNumber) + "\n" + messageSource.getMessage(
                 "quiz.answer",
                 new String[] {""},
-                bundleLocale.getLocale())
+                props.getLocale())
         );
         scanner = new Scanner(System.in);
         String answer;
@@ -65,13 +69,13 @@ public class QuizBundleImpl implements Quiz {
             return messageSource.getMessage(
                     "quiz.wrong",
                     new String[] {"\n"},
-                    bundleLocale.getLocale());
+                    props.getLocale());
         } else {
             counter.setRight();
             return messageSource.getMessage(
                     "quiz.right",
                     new String[] {"\n"},
-                    bundleLocale.getLocale());
+                    props.getLocale());
         }
         //return "Что-то пошло не так!";
     }

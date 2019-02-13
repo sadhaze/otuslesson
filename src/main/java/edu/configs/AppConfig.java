@@ -4,18 +4,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import java.util.Locale;
+
 @ConfigurationProperties
 public class AppConfig {
-    private MessageSource messageSource;
-
-    public MessageSource getMessage() {
+    public MessageSource getMessageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("/messages/messages");
         ms.setDefaultEncoding("Windows-1251");
         return ms;
     }
 
-    public void setMessage(MessageSource messageSource) {
-        this.messageSource = messageSource;
+    public Locale getLocale(){
+        return new Locale("en", "EN");
     }
 }
