@@ -10,42 +10,36 @@ import java.util.Scanner;
 
 @RestController
 public class QuizController{
-    private AnswerCounterController counter = null;
-    //private LocaleController bundleLocale = null;
-    private CsvQuestionReaderDao questionReader = null;
-    private GreetingController greetingController = null;
-    private MessageSource messageSource = null;
+    private AnswerCounterController counter;
+    private CsvQuestionReaderDao questionReader;
+    private GreetingController greetingController;
+    private MessageSource messageSource;
 
     private Scanner scanner;
 
-    //@Autowired
     public QuizController(AnswerCounterController counter, CsvQuestionReaderDao questionReader, GreetingController greetingController, AppConfig props){
         this.counter = counter;
-        //this.bundleLocale = props.getLocaleController();
         this.questionReader = questionReader;
         this.greetingController = greetingController;
-        //this.messageSource = props.getMessage();
-        //bundleLocale.setLocale(new Locale("en", "EN"));
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/quiz/{lname}/{fname}")
-    @ResponseBody
-    public void getQuiz(@PathVariable("lname") String lname, @PathVariable("fname") String fname, AppConfig props){
+        this.messageSource = props.getMessageSource();
         questionReader.readFile(
                 messageSource.getMessage(
                         "quiz.datafile.name",
                         new String[] {""},
                         props.getLocale())
         );
+    }
 
-        //System.out.println("\n" + bundleLocale.getLocale());
-        //System.out.println("\n" + greetingController.getGreeting(lname, fname));
+    @RequestMapping(method = RequestMethod.GET, value = "/quiz")
+    @ResponseBody
+    public String getQuiz(@RequestParam(name="lname") String lname, @RequestParam(name="fname") String fname, AppConfig props){
+        counter.clearCounter();
 
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
             this.getQuestion(i, props);
         }
 
-        //System.out.print("\n" + counter.getResult() + "\n");
+        return greetingController.getGreeting(lname, fname, props) + "<br>" + counter.getResult(props);
     }
 
     public String getQuestion(int questionNumber, AppConfig props) {
