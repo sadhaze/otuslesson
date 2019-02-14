@@ -12,10 +12,12 @@ public class AppConfig {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("/messages/messages");
         ms.setDefaultEncoding("Windows-1251");
+        //ms.setDefaultEncoding("UTF-8");
         return ms;
     }
 
     public Locale getLocale(){
         return new Locale("en", "EN");
+        //return new Locale("ru", "RU");
     }
 }

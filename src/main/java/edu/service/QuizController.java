@@ -36,7 +36,7 @@ public class QuizController{
         counter.clearCounter();
 
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
-            this.getQuestion(i, props);
+            System.out.println(this.getQuestion(i, props));
         }
 
         return greetingController.getGreeting(lname, fname, props) + "<br>" + counter.getResult(props);
