@@ -15,4 +15,8 @@ management:
       exposure:
         include: info, health, beans
 
-message: "Quiz web application"
+messageSourceBasename: "/messages/messages"
+MessageSourceEncoding: "Windows-1251"
+country: "EN"
+language: "en"
+

@@ -1,48 +1,52 @@
 package edu.service;
 
-import edu.configs.AppConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.configs.YAMLConfig;
 import org.springframework.context.MessageSource;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-import java.util.Locale;
 import java.util.Scanner;
 
-@RestController
+//@RestController
+@Service
 public class QuizController{
     private AnswerCounterController counter;
     private CsvQuestionReaderDao questionReader;
     private GreetingController greetingController;
     private MessageSource messageSource;
+    private YAMLConfig props;
 
     private Scanner scanner;
 
-    public QuizController(AnswerCounterController counter, CsvQuestionReaderDao questionReader, GreetingController greetingController, AppConfig props){
+    public QuizController(AnswerCounterController counter, CsvQuestionReaderDao questionReader, GreetingController greetingController, YAMLConfig props){
         this.counter = counter;
         this.questionReader = questionReader;
         this.greetingController = greetingController;
-        this.messageSource = props.getMessageSource();
+        this.props = props;
+        this.props.setLocale();
+        this.props.setMessageSource();
+        this.messageSource = this.props.getMessageSource();
         questionReader.readFile(
                 messageSource.getMessage(
                         "quiz.datafile.name",
                         new String[] {""},
-                        props.getLocale())
-        );
+                        props.getLocale()));
+        System.out.println(this.getQuiz("Ant", "Lit"));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/quiz")
+/*    @RequestMapping(method = RequestMethod.GET, value = "/quiz")
     @ResponseBody
-    public String getQuiz(@RequestParam(name="lname") String lname, @RequestParam(name="fname") String fname, AppConfig props){
+    public String getQuiz(@RequestParam(name="lname") String lname, @RequestParam(name="fname") String fname, YAMLConfig props){*/
+    public String getQuiz(String lname, String fname){
         counter.clearCounter();
 
         for(int i = 0; i < questionReader.questionValidation(i); i++) {
-            System.out.println(this.getQuestion(i, props));
+            System.out.println(this.getQuestion(i));
         }
 
-        return greetingController.getGreeting(lname, fname, props) + "<br>" + counter.getResult(props);
+        return greetingController.getGreeting(lname, fname) + "<br>" + counter.getResult();
     }
 
-    public String getQuestion(int questionNumber, AppConfig props) {
+    public String getQuestion(int questionNumber) {
         if(questionReader.questionValidation(questionNumber) == -1) {
             return messageSource.getMessage(
                     "quiz.noquestion",

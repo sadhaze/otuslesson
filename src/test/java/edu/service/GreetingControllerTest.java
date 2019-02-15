@@ -1,6 +1,6 @@
 package edu.service;
 
-import edu.configs.AppConfig;
+import edu.configs.YAMLConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +25,7 @@ class GreetingControllerTest {
     private TestRestTemplate testRestTemplate;
 
     //@Autowired
-    //private AppConfig props;
+    //private YAMLConfig props;
 
     //@MockBean
     //private GreetingController greetingController;
