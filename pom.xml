@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -22,7 +22,9 @@
 
         <junit-jupiter.version>5.2.0</junit-jupiter.version>
         <junit-platform.version>1.2.0</junit-platform.version>
-        <mockito.version>2.23.0</mockito.version>
+        <mockito.version>2.23.4</mockito.version>
+<!--        <org.springframework.version>4.0.0.RELEASE</org.springframework.version>
+        <org.springframework.batch>4.0.0.RELEASE</org.springframework.batch>-->
     </properties>
 
     <dependencies>
@@ -37,6 +39,37 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+<!--        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>-->
+<!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+      <!--  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -52,7 +85,7 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>RELEASE</version>
@@ -63,10 +96,22 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>-->
+        <!--        <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </dependency>-->
     </dependencies>
 
     <build>
@@ -74,6 +119,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -102,5 +150,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
